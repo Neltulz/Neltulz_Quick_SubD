@@ -3,7 +3,7 @@ bl_info = {
     "author" : "Neil V. Moore",
     "description" : 'Quickly subdivide mesh with preset hotkeys, picks best normal shading, supports multiple modes (Off, On, and On+), supports "Relative" and "Specific" Level Changing',
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 2),
+    "version" : (1, 0, 3),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",

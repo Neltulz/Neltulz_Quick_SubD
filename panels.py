@@ -23,7 +23,7 @@ from bpy.types import (Panel,
 class OBJECT_PT_NeltulzSubD(Panel):
 
     bl_idname = "object.neltulz_subd_panel"
-    bl_label = "Quick SubD v1.0.2"
+    bl_label = "Quick SubD v1.0.3"
     bl_category = "Quick SubD"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
