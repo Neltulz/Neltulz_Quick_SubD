@@ -14,7 +14,7 @@ def neltulz_subd_register_keymaps(addon_keymaps):
         keymapConfig = [("ONE", 1), ("TWO", 2), ("THREE", 3)]
 
         for keymap in keymapConfig:
-            kmi = km.keymap_items.new("object.neltulz_subd", type = keymap[0], ctrl=False, shift=False, alt=False, value = "PRESS")
+            kmi = km.keymap_items.new("ntz_qck_subd.subdivide_obj", type = keymap[0], ctrl=False, shift=False, alt=False, value = "PRESS")
             kmi.properties.subdMode = keymap[1]
 
     def createRelativeSpecific_mode_hotkeys():
@@ -22,7 +22,7 @@ def neltulz_subd_register_keymaps(addon_keymaps):
         keymapConfig = [("PAGE_UP", False), ("PAGE_DOWN", True)]
 
         for keymap in keymapConfig:
-            kmi = km.keymap_items.new("object.neltulz_subd_relative_level_change", type = keymap[0], ctrl=False, shift=False, alt=False, value = "PRESS")
+            kmi = km.keymap_items.new("ntz_qck_subd.relativelevelchange", type = keymap[0], ctrl=False, shift=False, alt=False, value = "PRESS")
             kmi.properties.decrease = keymap[1]
 
     def createSpecificLevelChange_hotkeys():
@@ -40,7 +40,7 @@ def neltulz_subd_register_keymaps(addon_keymaps):
                         ]
 
         for keymap in keymapConfig:
-            kmi = km.keymap_items.new("object.neltulz_subd_specific_level_change", type = keymap[0], ctrl=True, shift=False, alt=False, value = "PRESS")
+            kmi = km.keymap_items.new("ntz_qck_subd.specificlevelchange", type = keymap[0], ctrl=True, shift=False, alt=False, value = "PRESS")
             kmi.properties.useShortcutKeySpecificLevel = True
             kmi.properties.shortcutKeySpecificLevel = keymap[1]
 

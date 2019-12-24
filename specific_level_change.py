@@ -1,18 +1,7 @@
 import bpy
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
+from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
+from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 from . properties import NeltulzSubD_IgnitProperties
 from . import misc_functions
@@ -25,7 +14,7 @@ from . import misc_functions
 
 class OBJECT_OT_NeltulzSubD_Specific_LevelChange(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd_specific_level_change"
+    bl_idname = "ntz_qck_subd.specificlevelchange"
     bl_label = "Neltulz - Quick SubD - Specific Level Change"
     bl_description = "Changes the Specific subdivision level"
 

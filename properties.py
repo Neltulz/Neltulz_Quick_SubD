@@ -1,24 +1,12 @@
 import bpy
 from . import misc_functions
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
-
+from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
+from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 def neltulzSubD_setSpecificSubDLevel(self, context):
     if bpy.context.selected_objects:
-        bpy.ops.object.neltulz_subd_specific_level_change()
+        bpy.ops.ntz_qck_subd.specificlevelchange()
 
 def neltulzSubD_UpdateAdvancedSettings(self, context):
     
@@ -28,7 +16,7 @@ def neltulzSubD_UpdateAdvancedSettings(self, context):
         # This condition prevents this from happening
         if not context.scene.neltulzSubD.busyUpdatingAdvancedSettings:
             
-            bpy.ops.object.neltulz_subd_update_all_advanced_settings()
+            bpy.ops.ntz_qck_subd.updatealladvsettings()
             
         else:
             pass
@@ -88,6 +76,12 @@ def neltulzSubD_EnableAllEdgeColorsFunc(self, context):
 
 class NeltulzSubD_IgnitProperties(bpy.types.PropertyGroup):
 
+    bShowHideOptions : BoolProperty (
+        name="Show/Hide Options",
+        description="Reveals options.",
+        default = False,
+    )
+
     subd_change_method = [
         ("1", "Relative", "RELATIVE_CHANGE"),
         ("2", "Specific", "SPECIFIC_CHANGE"),
@@ -98,8 +92,6 @@ class NeltulzSubD_IgnitProperties(bpy.types.PropertyGroup):
         description="Default: Relative: Determines whether to change subdivision levels relative to the selected object's current level, or Specific: Set the level specifically to the one you want.",
         default="1"
     )
-
-
 
     specificSubDLevel : IntProperty(
         name="Specific SubD Level",
@@ -127,6 +119,12 @@ class NeltulzSubD_IgnitProperties(bpy.types.PropertyGroup):
         description="Default: False: Enables all edge colors",
         default = False,
         update=neltulzSubD_EnableAllEdgeColorsFunc
+    )
+
+    showAdvancedSettings : BoolProperty(
+        name="Show Advanced Settings",
+        description="Show Advanced Settings",
+        default = True
     )
 
     advancedSettings : BoolProperty(
@@ -205,7 +203,7 @@ class NeltulzSubD_IgnitProperties(bpy.types.PropertyGroup):
     disableConflictingModifiersBool : BoolProperty(
         name="Disable Conflicting Modifiers",
         description="Default: True: Automatically disables any conflicting modifiers",
-        default = True
+        default = False
     )
 
     keepSubDatBottomBool : BoolProperty(

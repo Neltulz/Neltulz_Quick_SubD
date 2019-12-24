@@ -8,8 +8,8 @@ from . import misc_functions
 
 class OBJECT_OT_NeltulzSubD_SubDWireframe(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd_toggle_wireframe"
-    bl_label = "Neltulz - Quick SubD - Toggle Wireframe ON/OFF"
+    bl_idname = "ntz_qck_subd.togglewireframe"
+    bl_label = "Neltulz - Quick SubD : Toggle Wireframe ON/OFF"
     bl_description = "Toggles the wireframe ON/OFF"
 
     subDWireframeOn: bpy.props.BoolProperty \
@@ -71,8 +71,8 @@ class OBJECT_OT_NeltulzSubD_SubDWireframe(bpy.types.Operator):
 
 class OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd_update_all_advanced_settings"
-    bl_label = "Neltulz - Quick SubD - Update Advanced Settings"
+    bl_idname = "ntz_qck_subd.updatealladvsettings"
+    bl_label = "Neltulz - Quick SubD : Update Advanced Settings"
     bl_description = "Updates the advanced settings"
 
     @classmethod
@@ -137,8 +137,8 @@ class OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings(bpy.types.Operator):
 
 class OBJECT_OT_NeltulzSubD_ApplyModifier(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd_apply_modifier"
-    bl_label = "Neltulz - Quick SubD - Apply Modifier"
+    bl_idname = "ntz_qck_subd.applymodifier"
+    bl_label = "Neltulz - Quick SubD : Apply Modifier"
     bl_description = "Applies the modifier as data (Destructive operation)"
 
     @classmethod
@@ -212,8 +212,8 @@ class OBJECT_OT_NeltulzSubD_ApplyModifier(bpy.types.Operator):
 
 class OBJECT_OT_NeltulzSubD_DeleteModifier(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd_delete_modifier"
-    bl_label = "Neltulz - Quick SubD - Delete Modifier"
+    bl_idname = "ntz_qck_subd.deletemodifier"
+    bl_label = "Neltulz - Quick SubD : Delete Modifier"
     bl_description = "Deletes the modifier"
 
     @classmethod
@@ -285,8 +285,8 @@ class OBJECT_OT_NeltulzSubD_DeleteModifier(bpy.types.Operator):
 
 class OBJECT_OT_NeltulzSubD_ResetAllSettings(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_reset_all_settings"
-    bl_label = "Neltulz - Quick SubD - Reset All Settings"
+    bl_idname = "ntz_qck_subd.resetallsettings"
+    bl_label = "Neltulz - Quick SubD : Reset All Settings"
     bl_description = "Resets all settings"
 
     @classmethod

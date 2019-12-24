@@ -9,7 +9,7 @@ from . import subdivide_object
 
 class OBJECT_OT_NeltulzSubD(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_subd"
+    bl_idname = "ntz_qck_subd.subdivide_obj"
     bl_label = "Neltulz - Quick SubD"
     bl_description = "Subdivides your object quickly"
 

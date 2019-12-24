@@ -3,7 +3,6 @@ import types
 from . properties import NeltulzSubD_IgnitProperties
 from . import misc_functions
 
-
 def execute(self, context):
     
     scene = context.scene
