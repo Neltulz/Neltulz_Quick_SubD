@@ -1,12 +1,12 @@
 import bpy
-from . properties import NeltulzSubD_IgnitProperties
+from . properties import NTZQSUBD_ignitproperties
 from . import misc_functions
 
 # -----------------------------------------------------------------------------
 #    SubD Wireframe
 # -----------------------------------------------------------------------------    
 
-class OBJECT_OT_NeltulzSubD_SubDWireframe(bpy.types.Operator):
+class NTZQSUBD_OT_subdwireframe(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.togglewireframe"
     bl_label = "Neltulz - Quick SubD : Toggle Wireframe ON/OFF"
@@ -69,7 +69,7 @@ class OBJECT_OT_NeltulzSubD_SubDWireframe(bpy.types.Operator):
 # -----------------------------------------------------------------------------  
 
 
-class OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings(bpy.types.Operator):
+class NTZQSUBD_OT_updatealladvancedsettings(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.updatealladvsettings"
     bl_label = "Neltulz - Quick SubD : Update Advanced Settings"
@@ -135,7 +135,7 @@ class OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings(bpy.types.Operator):
 # -----------------------------------------------------------------------------  
 
 
-class OBJECT_OT_NeltulzSubD_ApplyModifier(bpy.types.Operator):
+class NTZQSUBD_OT_applymodifier(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.applymodifier"
     bl_label = "Neltulz - Quick SubD : Apply Modifier"
@@ -210,7 +210,7 @@ class OBJECT_OT_NeltulzSubD_ApplyModifier(bpy.types.Operator):
 # -----------------------------------------------------------------------------  
 
 
-class OBJECT_OT_NeltulzSubD_DeleteModifier(bpy.types.Operator):
+class NTZQSUBD_OT_delmodifier(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.deletemodifier"
     bl_label = "Neltulz - Quick SubD : Delete Modifier"
@@ -283,7 +283,7 @@ class OBJECT_OT_NeltulzSubD_DeleteModifier(bpy.types.Operator):
 # -----------------------------------------------------------------------------  
 
 
-class OBJECT_OT_NeltulzSubD_ResetAllSettings(bpy.types.Operator):
+class NTZQSUBD_OT_resetallsettings(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.resetallsettings"
     bl_label = "Neltulz - Quick SubD : Reset All Settings"

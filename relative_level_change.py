@@ -3,7 +3,7 @@ import bpy
 from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
 from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
-from . properties import NeltulzSubD_IgnitProperties
+from . properties import NTZQSUBD_ignitproperties
 from . import misc_functions
 
 
@@ -12,7 +12,7 @@ from . import misc_functions
 #    Level Change Operator
 # -----------------------------------------------------------------------------    
 
-class OBJECT_OT_NeltulzSubD_Relative_LevelChange(bpy.types.Operator):
+class NTZQSUBD_OT_relativelevelchange(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.relativelevelchange"
     bl_label = "Neltulz - Quick SubD - Level Change"

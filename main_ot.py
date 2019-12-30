@@ -1,5 +1,5 @@
 import bpy
-from . properties import NeltulzSubD_IgnitProperties
+from . properties import NTZQSUBD_ignitproperties
 from . import misc_functions
 from . import subdivide_object
 
@@ -7,7 +7,7 @@ from . import subdivide_object
 #    Main Addon Operator
 # -----------------------------------------------------------------------------    
 
-class OBJECT_OT_NeltulzSubD(bpy.types.Operator):
+class NTZQSUBD_OT_subdmainoperator(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.subdivide_obj"
     bl_label = "Neltulz - Quick SubD"

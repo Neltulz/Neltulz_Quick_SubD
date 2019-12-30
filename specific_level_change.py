@@ -3,7 +3,7 @@ import bpy
 from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
 from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
-from . properties import NeltulzSubD_IgnitProperties
+from . properties import NTZQSUBD_ignitproperties
 from . import misc_functions
 
 
@@ -12,7 +12,7 @@ from . import misc_functions
 #    Level Change Operator
 # -----------------------------------------------------------------------------    
 
-class OBJECT_OT_NeltulzSubD_Specific_LevelChange(bpy.types.Operator):
+class NTZQSUBD_OT_specificlevelchange(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "ntz_qck_subd.specificlevelchange"
     bl_label = "Neltulz - Quick SubD - Specific Level Change"
@@ -60,7 +60,7 @@ class OBJECT_OT_NeltulzSubD_Specific_LevelChange(bpy.types.Operator):
                 bpy.ops.object.editmode_toggle()
 
                 if self.useShortcutKeySpecificLevel:
-                    #Use the specific SubD level for the pressed hotkey (CTRL+Shift+1 etc)
+                    #Use the specific SubD level for the pressed keymap (CTRL+Shift+1 etc)
                     misc_functions.applySpecificLevelChange(self, context, obj, scene, self.shortcutKeySpecificLevel, neltulzSubD_modifier, neltulzSubDLevelCustomProp)
                 else:
                     #Use the Specific SubD level in the "Quick SubD panel"
@@ -75,7 +75,7 @@ class OBJECT_OT_NeltulzSubD_Specific_LevelChange(bpy.types.Operator):
                 if bpy.context.selected_objects:
 
                     if self.useShortcutKeySpecificLevel:
-                        #Use the specific SubD level for the pressed hotkey (CTRL+Shift+1 etc)
+                        #Use the specific SubD level for the pressed keymap (CTRL+Shift+1 etc)
                         misc_functions.applySpecificLevelChange(self, context, obj, scene, self.shortcutKeySpecificLevel, neltulzSubD_modifier, neltulzSubDLevelCustomProp)
                     else:
                         #Use the Specific SubD level in the "Quick SubD panel"
@@ -112,7 +112,7 @@ class OBJECT_OT_NeltulzSubD_Specific_LevelChange(bpy.types.Operator):
                 resultingLevel = 0
 
                 if self.useShortcutKeySpecificLevel:
-                    #Use the specific level from the pressed hotkey shortcut
+                    #Use the specific level from the pressed keymap shortcut
                     resultingLevel = self.shortcutKeySpecificLevel
 
                 else:

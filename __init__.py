@@ -1,9 +1,9 @@
 bl_info = {
     "name" : "Neltulz - Quick SubD",
     "author" : "Neil V. Moore",
-    "description" : 'Quickly subdivide mesh with preset hotkeys, picks best normal shading, supports multiple modes (Off, On, and On+), supports "Relative" and "Specific" Level Changing',
+    "description" : 'Quickly subdivide mesh with preset keymaps, picks best normal shading, supports multiple modes (Off, On, and On+), supports "Relative" and "Specific" Level Changing',
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 4),
+    "version" : (1, 0, 5),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
@@ -17,17 +17,19 @@ bl_info = {
 
 import bpy
 
-from . properties import NeltulzSubD_IgnitProperties
-from . misc_ot import OBJECT_OT_NeltulzSubD_SubDWireframe
-from . misc_ot import OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings
-from . misc_ot import OBJECT_OT_NeltulzSubD_ApplyModifier
-from . misc_ot import OBJECT_OT_NeltulzSubD_DeleteModifier
-from . misc_ot import OBJECT_OT_NeltulzSubD_ResetAllSettings
-from . main_ot import OBJECT_OT_NeltulzSubD
-from . relative_level_change import OBJECT_OT_NeltulzSubD_Relative_LevelChange
-from . specific_level_change import OBJECT_OT_NeltulzSubD_Specific_LevelChange
-from . addon_preferences import OBJECT_OT_NeltulzSubD_Preferences
-from . panels import OBJECT_PT_NeltulzSubD
+from . properties import NTZQSUBD_ignitproperties
+from . misc_ot import NTZQSUBD_OT_subdwireframe
+from . misc_ot import NTZQSUBD_OT_updatealladvancedsettings
+from . misc_ot import NTZQSUBD_OT_applymodifier
+from . misc_ot import NTZQSUBD_OT_delmodifier
+from . misc_ot import NTZQSUBD_OT_resetallsettings
+from . main_ot import NTZQSUBD_OT_subdmainoperator
+from . relative_level_change import NTZQSUBD_OT_relativelevelchange
+from . specific_level_change import NTZQSUBD_OT_specificlevelchange
+from . addon_preferences import NTZQSUBD_OT_ntzaddonprefs
+from . panels import NTZQSUBD_PT_changesubdlevel
+from . panels import NTZQSUBD_PT_options
+from . panels import NTZQSUBD_PT_sidebarpanel
 
 
 from . import keymaps
@@ -40,17 +42,19 @@ PendingDeprecationWarning
 # -----------------------------------------------------------------------------  
 
 classes = (
-    NeltulzSubD_IgnitProperties,
-    OBJECT_OT_NeltulzSubD_SubDWireframe,
-    OBJECT_OT_NeltulzSubD_UpdateAllAdvancedSettings,
-    OBJECT_OT_NeltulzSubD_ApplyModifier,
-    OBJECT_OT_NeltulzSubD_DeleteModifier,
-    OBJECT_OT_NeltulzSubD_ResetAllSettings,
-    OBJECT_OT_NeltulzSubD,
-    OBJECT_OT_NeltulzSubD_Relative_LevelChange,
-    OBJECT_OT_NeltulzSubD_Specific_LevelChange,
-    OBJECT_OT_NeltulzSubD_Preferences,
-    OBJECT_PT_NeltulzSubD,
+    NTZQSUBD_ignitproperties,
+    NTZQSUBD_OT_subdwireframe,
+    NTZQSUBD_OT_updatealladvancedsettings,
+    NTZQSUBD_OT_applymodifier,
+    NTZQSUBD_OT_delmodifier,
+    NTZQSUBD_OT_resetallsettings,
+    NTZQSUBD_OT_subdmainoperator,
+    NTZQSUBD_OT_relativelevelchange,
+    NTZQSUBD_OT_specificlevelchange,
+    NTZQSUBD_OT_ntzaddonprefs,
+    NTZQSUBD_PT_changesubdlevel,
+    NTZQSUBD_PT_options,
+    NTZQSUBD_PT_sidebarpanel,
 )
 
 # -----------------------------------------------------------------------------
@@ -65,13 +69,14 @@ def register():
         register_class(cls)
 
     # update panel name
-    addon_preferences.update_panel(None, bpy.context)
+    prefs = bpy.context.preferences.addons[__name__].preferences
+    addon_preferences.update_panel(prefs, bpy.context)
 
     #add keymaps from keymaps.py
     keymaps.neltulz_subd_register_keymaps(addon_keymaps)
 
     #add property group to the scene
-    bpy.types.Scene.neltulzSubD = bpy.props.PointerProperty(type=NeltulzSubD_IgnitProperties)
+    bpy.types.Scene.neltulzSubD = bpy.props.PointerProperty(type=NTZQSUBD_ignitproperties)
 
 def unregister():
     from bpy.utils import unregister_class

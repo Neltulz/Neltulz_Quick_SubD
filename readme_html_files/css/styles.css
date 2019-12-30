@@ -521,8 +521,8 @@ li {
         color: hsl(240, 100%, 78%);
     }
 
-    .table td.hotkey:before {
-        content: "Hotkey: ";
+    .table td.keymap:before {
+        content: "Keymap: ";
     }
 
     .table td.result:before {

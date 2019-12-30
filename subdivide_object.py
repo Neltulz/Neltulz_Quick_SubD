@@ -1,6 +1,6 @@
 import bpy
 import types
-from . properties import NeltulzSubD_IgnitProperties
+from . properties import NTZQSUBD_ignitproperties
 from . import misc_functions
 
 def execute(self, context):

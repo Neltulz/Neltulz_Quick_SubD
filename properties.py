@@ -74,12 +74,51 @@ def neltulzSubD_EnableAllEdgeColorsFunc(self, context):
         bpy.context.space_data.overlay.show_edge_seams = True
         context.scene.neltulzSubD.enableAllEdgeColorsBool = False
 
-class NeltulzSubD_IgnitProperties(bpy.types.PropertyGroup):
+class NTZQSUBD_ignitproperties(bpy.types.PropertyGroup):
+
+    bShowHideLevelChangeOptions : BoolProperty (
+        name="Change SubD Level",
+        description="Shows options for changing SubD Level",
+        default = True,
+    )
 
     bShowHideOptions : BoolProperty (
         name="Show/Hide Options",
         description="Reveals options.",
         default = False,
+    )
+
+    changeLevel_PopoverEnum_List = [
+        ("CHANGE_LEVEL", "Change SubD Level", "", "", 0),
+    ]
+
+    changeLevel_PopoverEnum : EnumProperty (
+        items       = changeLevel_PopoverEnum_List,
+        name        = "Change Level Popover Enum",
+        description = "Change Level Popover Enum",
+        default     = "CHANGE_LEVEL"
+    )
+
+    changeLevel_CompactPopoverEnum_List = [
+        ("CHANGE_LEVEL", "SubD Lvl", "", "", 0),
+    ]
+
+    changeLevel_CompactPopoverEnum : EnumProperty (
+        items       = changeLevel_CompactPopoverEnum_List,
+        name        = "Change Level Popover Enum",
+        description = "Change Level Popover Enum",
+        default     = "CHANGE_LEVEL"
+    )
+
+    options_PopoverEnum_List = [
+        ("OPTIONS", "Options", "", "", 0),
+    ]
+
+    options_PopoverEnum : EnumProperty (
+        items       = options_PopoverEnum_List,
+        name        = "Options Popover Enum",
+        description = "Options Popover Enum",
+        default     = "OPTIONS"
     )
 
     subd_change_method = [
