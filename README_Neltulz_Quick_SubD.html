@@ -10,11 +10,11 @@
         <meta name="twitter:card" value="summary">
 
         <!-- Open Graph data -->
-        <meta property="og:title" content="Neltulz - Quick SubD v1.0.5" />
+        <meta property="og:title" content="Neltulz - Quick SubD v1.0.6" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.logichaos.com/neltulz_blender_addons/neltulz_quick_subd_readme/README_Neltulz_Quick_SubD.html"/>
         <meta property="og:image" content="https://www.logichaos.com/neltulz_blender_addons/neltulz_quick_subd_readme/readme_html_files/img/logo.png" />
-        <meta property="og:description" content="Updated: 12/30/2019 - A quick way to subdivide single or multiple objects in your scene for spotting problems." />
+        <meta property="og:description" content="Updated: 2/20/2020 - A quick way to subdivide single or multiple objects in your scene for spotting problems." />
 
         <link href="readme_html_files/fontawesome-free-5.10.1-web/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="readme_html_files/css/bootstrap-reboot.min.css">
@@ -82,7 +82,7 @@
             </picture>
 
             <h1 class="pageTitle">
-                Neltulz - Quick SubD<br><span class="versionNum">Version: 1.0.5<br>Last Update: 12/30/2019</span>
+                Neltulz - Quick SubD<br><span class="versionNum">Version: 1.0.6<br>Last Update: 2/20/2020</span>
             </h1>
 
             <div class="versionAndDownloadBar">
@@ -139,10 +139,12 @@
             <div class="pageDesc">
                 <p>A quick way to subdivide single or multiple objects in your scene for spotting problems.</p>
             </div>
-
+            
+            <!--
             <div class="youtubeVideo">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/fkU0QxtMsn0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+            -->
 
             <h3>Table of Contents</h3>
 
@@ -235,119 +237,119 @@
                         <tr>
                             <td class="keymap primary">1</td>
                             <td class="result success">SubD Mode 1</td>
-                            <td class="command">ntz_qck_subd.subdivide_obj</td>
+                            <td class="command">ntzqcksubd.setsubdmode</td>
                             <td class="properties">subdMode = 1</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">2</td>
                             <td class="result success">SubD Mode 2</td>
-                            <td class="command">ntz_qck_subd.subdivide_obj</td>
+                            <td class="command">ntzqcksubd.setsubdmode</td>
                             <td class="properties">subdMode = 2</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">3</td>
                             <td class="result success">SubD Mode 3</td>
-                            <td class="command">ntz_qck_subd.subdivide_obj</td>
+                            <td class="command">ntzqcksubd.setsubdmode</td>
                             <td class="properties">subdMode = 3</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">Page Up</td>
                             <td class="result success">Increase Subdivision Level</td>
-                            <td class="command">ntz_qck_subd.relativelevelchange</td>
+                            <td class="command">ntzqcksubd.relativelevelchange</td>
                             <td class="properties">decrease = False</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">Page Down</td>
                             <td class="result success">Decrease Subdivision Level</td>
-                            <td class="command">ntz_qck_subd.relativelevelchange</td>
+                            <td class="command">ntzqcksubd.relativelevelchange</td>
                             <td class="properties">decrease = True</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">OS Key + Mouse Wheel UP</td>
                             <td class="result success">Increase Subdivision Level</td>
-                            <td class="command">ntz_qck_subd.relativelevelchange</td>
+                            <td class="command">ntzqcksubd.relativelevelchange</td>
                             <td class="properties">decrease = False</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">OS Key + Mouse Wheel DOWN</td>
                             <td class="result success">Decrease Subdivision Level</td>
-                            <td class="command">ntz_qck_subd.relativelevelchange</td>
+                            <td class="command">ntzqcksubd.relativelevelchange</td>
                             <td class="properties">decrease = True</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 0</td>
                             <td class="result success">Set Specific SubD Level to 0 (OFF)</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 1</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 1</td>
                             <td class="result success">Set Specific SubD Level to 1</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 2</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 2</td>
                             <td class="result success">Set Specific SubD Level to 2</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 3</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 3</td>
                             <td class="result success">Set Specific SubD Level to 3</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 3</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 4</td>
                             <td class="result success">Set Specific SubD Level to 4</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 4</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 5</td>
                             <td class="result success">Set Specific SubD Level to 5</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 5</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 6</td>
                             <td class="result success">Set Specific SubD Level to 6</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 6</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 7</td>
                             <td class="result success">Set Specific SubD Level to 7</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 7</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 8</td>
                             <td class="result success">Set Specific SubD Level to 8</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 8</td>
                         </tr>
 
                         <tr>
                             <td class="keymap primary">CTRL + 9</td>
                             <td class="result success">Set Specific SubD Level to 9</td>
-                            <td class="command">ntz_qck_subd.specificlevelchange</td>
+                            <td class="command">ntzqcksubd.specificlevelchange</td>
                             <td class="properties">useShortcutKeySpecificLevel = True,<br>shortcutKeySpecificLevel = 9</td>
                         </tr>
 
@@ -411,6 +413,13 @@
             <h3 id="changelog">Changelog</h3>
 
                 <ul>
+                    <li>2020-02020
+                        <ul>
+                            <li>Added ability to toggle SubD</li>
+                            <li>Added ability to set a SubD Mode preference, so that you can choose whether you want "SubD Mode 2 (ON)" or "SubD Mode 3 (On+)" by default</li>
+                            <li>Added ability to choose an initial SubD Level when enabling subdivision for the very first time.</li>
+                        </ul>
+                    </li>
                     <li>2019-12-30
                         <ul>
                             <li>Fixed bug that was causing the sidebar category name to not be remembered when restarting blender (Thanks to iceythe for helping me resolve this)</li>

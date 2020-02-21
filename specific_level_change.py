@@ -14,7 +14,7 @@ from . import misc_functions
 
 class NTZQSUBD_OT_specificlevelchange(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.specificlevelchange"
+    bl_idname = "ntzqcksubd.specificlevelchange"
     bl_label = "Neltulz - Quick SubD - Specific Level Change"
     bl_description = "Changes the Specific subdivision level"
 

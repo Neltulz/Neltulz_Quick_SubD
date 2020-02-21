@@ -78,7 +78,7 @@ def mainQuickSubDPanel(self, context, bUseCompactSidebarPanel, bUseCompactPopupA
             layout.label(text="Quick SubD")
         else:
             layout.ui_units_x = 13
-            layout.label(text="Quick SubD v1.0.5")
+            layout.label(text="Quick SubD v1.0.6")
     else:
         if bUseCompactSidebarPanel:
             layout.ui_units_x = 8
@@ -203,15 +203,15 @@ def OffOnOnPlus_Section(self, context, scene, activeObj, selObjs, numSelObjs, ne
 
 
     buttonOneOff = onOffButtonRow.column(align=True)
-    op = buttonOneOff.operator('ntz_qck_subd.subdivide_obj', text="1 (Off)", depress=buttonOneOff_active)
+    op = buttonOneOff.operator('ntzqcksubd.setsubdmode', text="1 (Off)", depress=buttonOneOff_active)
     op.subdMode=1
 
     buttonTwoOn = onOffButtonRow.column(align=True)
-    op = buttonTwoOn.operator('ntz_qck_subd.subdivide_obj', text="2 (On)", depress=buttonTwoOn_active)
+    op = buttonTwoOn.operator('ntzqcksubd.setsubdmode', text="2 (On)", depress=buttonTwoOn_active)
     op.subdMode=2
 
     buttonThreeOnPlus = onOffButtonRow.column(align=True)
-    op = buttonThreeOnPlus.operator('ntz_qck_subd.subdivide_obj', text="3 (On+)", depress=buttonThreeOnPlus_active)
+    op = buttonThreeOnPlus.operator('ntzqcksubd.setsubdmode', text="3 (On+)", depress=buttonThreeOnPlus_active)
     op.subdMode=3
 
 def changeSubDLevel_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, panelInsidePopupOrPie, bUseCompactSidebarPanel, bUseCompactPopupAndPiePanel, layout):
@@ -283,11 +283,11 @@ def changeSubDLevel_SectionInner(self, context, scene, activeObj, selObjs, numSe
         currentSubDLevel = f"{neltulzSubD_modifier.levels}"
         currentSubDRenderLevel = f"{neltulzSubD_modifier.render_levels}"
 
-        renderLevelsRow.label(text=f"SubD Level: {currentSubDLevel}")
-        renderLevelsRow.label(text=f"Render Level: {currentSubDRenderLevel}")
+        renderLevelsRow.label(text=f"View Lvl: {currentSubDLevel}")
+        renderLevelsRow.label(text=f"Render Lvl: {currentSubDRenderLevel}")
 
     else:
-        renderLevelsRow.label(text=f"SubD Level:")
+        renderLevelsRow.label(text=f"View Lvl:")
 
     row = levelChangeCol.row(align=True)
     
@@ -298,15 +298,15 @@ def changeSubDLevel_SectionInner(self, context, scene, activeObj, selObjs, numSe
 
     if scene.neltulzSubD.changeMethod == "1":
         row = col.row(align=True)
-        op = row.operator('ntz_qck_subd.relativelevelchange', text="-")
+        op = row.operator('ntzqcksubd.relativelevelchange', text="-")
         op.decrease=True
 
-        op = row.operator('ntz_qck_subd.relativelevelchange', text="+")
+        op = row.operator('ntzqcksubd.relativelevelchange', text="+")
         op.decrease=False
     else:
         row = col.row(align=True)
         row.prop(scene.neltulzSubD, "specificSubDLevel", text="")
-        op = row.operator('ntz_qck_subd.specificlevelchange', text="Set")
+        op = row.operator('ntzqcksubd.specificlevelchange', text="Set")
 
 def options_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, panelInsidePopupOrPie, bUseCompactSidebarPanel, bUseCompactPopupAndPiePanel, layout):
 
@@ -366,21 +366,40 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
         if bWrapInBox: optionsCol = layout.box()
         else:          optionsCol = layout
         
+
+    # -----------------------------------------------------------------------------
+    #   General Options
+    # -----------------------------------------------------------------------------
+
+    generalOptionsWrapper = optionsCol.box().column(align=True)
+
+    #create show/hide toggle for options section
+    createShowHide(self, context, scene, "neltulzSubD", "toggleGeneralOptionsBool", None, "General Settings", generalOptionsWrapper)
     
+
+    if scene.neltulzSubD.toggleGeneralOptionsBool is True:
+        generalOptionsWrapper.separator()
+
+        options_general_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, False, False, generalOptionsWrapper)
+
+    #END General Options (Wireframe, Edge colors, etc)
+
+    optionsCol.separator()
+
     # -----------------------------------------------------------------------------
     #   Overlay Options (Wireframe, Edge colors, etc)
     # -----------------------------------------------------------------------------
 
-    overlayOptionsWrapper = optionsCol.column(align=True)
+    overlayOptionsWrapper = optionsCol.box().column(align=True)
 
     #create show/hide toggle for options section
     createShowHide(self, context, scene, "neltulzSubD", "toggleOverlayOptionsBool", None, "Display Settings", overlayOptionsWrapper)
     
-    if scene.neltulzSubD.toggleOverlayOptionsBool is True:
 
+    if scene.neltulzSubD.toggleOverlayOptionsBool is True:
         overlayOptionsWrapper.separator()
 
-        options_wireframeAndEdgeDisplay_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, True, True, overlayOptionsWrapper)
+        options_wireframeAndEdgeDisplay_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, False, False, overlayOptionsWrapper)
 
     #END Overlay Options (Wireframe, Edge colors, etc)
 
@@ -390,16 +409,18 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
 
     optionsCol.separator()
     
-    advancedSettingsWrapper = optionsCol.column(align=True)
+    advancedSettingsWrapper = optionsCol.box().column(align=True)
 
     #create show/hide toggle for options section
     createShowHide(self, context, scene, "neltulzSubD", "showAdvancedSettings", "advancedSettings", "Use Advanced Settings", advancedSettingsWrapper)
+
     
     if scene.neltulzSubD.showAdvancedSettings:
+        advancedSettingsWrapper.separator()
 
         advancedSettingsWrapper.separator()
 
-        options_advancedSettings_Section(self, context, scene, True, True, advancedSettingsWrapper)
+        options_advancedSettings_Section(self, context, scene, False, False, advancedSettingsWrapper)
 
         #END Use Advanced Settings Box
 
@@ -408,12 +429,42 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
     delResetApplyButtons = layout.row(align=True)
     delResetApplyButtons.scale_y = 1.5
     
-    op = delResetApplyButtons.operator('ntz_qck_subd.deletemodifier', text="Delete Modifier")
-    op = delResetApplyButtons.operator('ntz_qck_subd.applymodifier', text="Apply Modifier")
+    op = delResetApplyButtons.operator('ntzqcksubd.deletemodifier', text="Delete", icon="X")
+    op = delResetApplyButtons.operator('ntzqcksubd.applymodifier', text="Apply", icon="CHECKMARK")
 
     layout.separator()     
 
-    op = layout.operator('ntz_qck_subd.resetallsettings', text="Reset All Settings")
+    op = layout.operator('ntzqcksubd.resetallsettings', text="Reset All Settings", icon="LOOP_BACK")
+
+def options_general_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, bIndent, bWrapInBox, layout):
+    if bIndent:
+
+        overlayOptionsRow = layout.row(align=True)
+
+        spacer = overlayOptionsRow.column(align=True)
+        spacer.label(text="", icon="BLANK1")
+
+        if bWrapInBox: overlayOptionsCol = overlayOptionsRow.box()
+        else:          overlayOptionsCol = overlayOptionsRow.column(align=True)
+
+    else:
+
+        if bWrapInBox: overlayOptionsCol = layout.box()
+        else:          overlayOptionsCol = layout
+        
+
+    subdModePreference = overlayOptionsCol.column(align=True)
+    subdModePreference.label(text="SubD Mode Preference:")
+    subdModePreference.prop(scene.neltulzSubD, 'subdModePreference', text="")
+
+    overlayOptionsCol.separator()
+    
+    overlayOptionsCol.prop(scene.neltulzSubD, 'toggleSubDModes')
+
+    overlayOptionsCol.separator()
+
+    overlayOptionsCol.prop(scene.neltulzSubD, 'initialSubDLevel', slider=False)
+    
 
 def options_wireframeAndEdgeDisplay_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, bIndent, bWrapInBox, layout):
 
@@ -456,10 +507,10 @@ def options_wireframeAndEdgeDisplay_Section(self, context, scene, activeObj, sel
             subdWireframeOFF_active = False
 
 
-    op = row.operator('ntz_qck_subd.togglewireframe', text="ON", depress=subdWireframeON_active)
+    op = row.operator('ntzqcksubd.togglewireframe', text="ON", depress=subdWireframeON_active)
     op.subDWireframeOn=True
 
-    op = row.operator('ntz_qck_subd.togglewireframe', text="OFF", depress=subdWireframeOFF_active)
+    op = row.operator('ntzqcksubd.togglewireframe', text="OFF", depress=subdWireframeOFF_active)
     op.subDWireframeOn=False
     
     col.separator()
@@ -491,7 +542,7 @@ def options_advancedSettings_Section(self, context, scene, bIndent, bWrapInBox, 
 
     else:
         if bWrapInBox: advancedSettingsCol = layout.box()
-        else:          advancedSettingsCol = layout
+        else:          advancedSettingsCol = layout.column(align=True)
         
 
 
@@ -533,5 +584,3 @@ def options_advancedSettings_Section(self, context, scene, bIndent, bWrapInBox, 
     col.prop(scene.neltulzSubD, "keepSubDatBottomBool", text='Keep SubD Modifier at Bottom')
     col.prop(scene.neltulzSubD, "pickBestShadingBool", text='Pick Best Shading')
     col.prop(scene.neltulzSubD, "showPolyCountWarningsBool", text='Show Poly Count Warnings')
-    
-    col.separator()

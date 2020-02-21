@@ -8,7 +8,7 @@ from . import misc_functions
 
 class NTZQSUBD_OT_subdwireframe(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.togglewireframe"
+    bl_idname = "ntzqcksubd.togglewireframe"
     bl_label = "Neltulz - Quick SubD : Toggle Wireframe ON/OFF"
     bl_description = "Toggles the wireframe ON/OFF"
 
@@ -71,7 +71,7 @@ class NTZQSUBD_OT_subdwireframe(bpy.types.Operator):
 
 class NTZQSUBD_OT_updatealladvancedsettings(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.updatealladvsettings"
+    bl_idname = "ntzqcksubd.updatealladvsettings"
     bl_label = "Neltulz - Quick SubD : Update Advanced Settings"
     bl_description = "Updates the advanced settings"
 
@@ -137,7 +137,7 @@ class NTZQSUBD_OT_updatealladvancedsettings(bpy.types.Operator):
 
 class NTZQSUBD_OT_applymodifier(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.applymodifier"
+    bl_idname = "ntzqcksubd.applymodifier"
     bl_label = "Neltulz - Quick SubD : Apply Modifier"
     bl_description = "Applies the modifier as data (Destructive operation)"
 
@@ -212,7 +212,7 @@ class NTZQSUBD_OT_applymodifier(bpy.types.Operator):
 
 class NTZQSUBD_OT_delmodifier(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.deletemodifier"
+    bl_idname = "ntzqcksubd.deletemodifier"
     bl_label = "Neltulz - Quick SubD : Delete Modifier"
     bl_description = "Deletes the modifier"
 
@@ -285,7 +285,7 @@ class NTZQSUBD_OT_delmodifier(bpy.types.Operator):
 
 class NTZQSUBD_OT_resetallsettings(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.resetallsettings"
+    bl_idname = "ntzqcksubd.resetallsettings"
     bl_label = "Neltulz - Quick SubD : Reset All Settings"
     bl_description = "Resets all settings"
 

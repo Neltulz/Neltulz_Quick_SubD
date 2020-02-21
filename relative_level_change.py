@@ -14,7 +14,7 @@ from . import misc_functions
 
 class NTZQSUBD_OT_relativelevelchange(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_qck_subd.relativelevelchange"
+    bl_idname = "ntzqcksubd.relativelevelchange"
     bl_label = "Neltulz - Quick SubD - Level Change"
     bl_description = "Changes the subdivision level"
 

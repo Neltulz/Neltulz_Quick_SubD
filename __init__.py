@@ -3,7 +3,7 @@ bl_info = {
     "author" : "Neil V. Moore",
     "description" : 'Quickly subdivide mesh with preset keymaps, picks best normal shading, supports multiple modes (Off, On, and On+), supports "Relative" and "Specific" Level Changing',
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 5),
+    "version" : (1, 0, 6),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
@@ -17,25 +17,30 @@ bl_info = {
 
 import bpy
 
-from . properties import NTZQSUBD_ignitproperties
-from . misc_ot import NTZQSUBD_OT_subdwireframe
-from . misc_ot import NTZQSUBD_OT_updatealladvancedsettings
-from . misc_ot import NTZQSUBD_OT_applymodifier
-from . misc_ot import NTZQSUBD_OT_delmodifier
-from . misc_ot import NTZQSUBD_OT_resetallsettings
-from . main_ot import NTZQSUBD_OT_subdmainoperator
-from . relative_level_change import NTZQSUBD_OT_relativelevelchange
-from . specific_level_change import NTZQSUBD_OT_specificlevelchange
-from . addon_preferences import NTZQSUBD_OT_ntzaddonprefs
-from . panels import NTZQSUBD_PT_changesubdlevel
-from . panels import NTZQSUBD_PT_options
-from . panels import NTZQSUBD_PT_sidebarpanel
+from . properties                   import NTZQSUBD_ignitproperties
+from . misc_ot                      import NTZQSUBD_OT_subdwireframe
+from . misc_ot                      import NTZQSUBD_OT_updatealladvancedsettings
+from . misc_ot                      import NTZQSUBD_OT_applymodifier
+from . misc_ot                      import NTZQSUBD_OT_delmodifier
+from . misc_ot                      import NTZQSUBD_OT_resetallsettings
+from . main_ot                      import NTZQSUBD_OT_setsubdmode
+from . relative_level_change        import NTZQSUBD_OT_relativelevelchange
+from . specific_level_change        import NTZQSUBD_OT_specificlevelchange
+from . addon_preferences            import NTZQSUBD_OT_ntzaddonprefs
+from . panels                       import NTZQSUBD_PT_changesubdlevel
+from . panels                       import NTZQSUBD_PT_options
+from . panels                       import NTZQSUBD_PT_sidebarpanel
 
 
 from . import keymaps
 
 PendingDeprecationWarning
 
+bDebugModeActive = False
+if bDebugModeActive:
+    print("##################################################################################################################################################################")
+    print("REMINDER: DEBUG MODE ACTIVE")
+    print("##################################################################################################################################################################")
 
 # -----------------------------------------------------------------------------
 #    Store classes in List so that they can be easily registered/unregistered    
@@ -48,7 +53,7 @@ classes = (
     NTZQSUBD_OT_applymodifier,
     NTZQSUBD_OT_delmodifier,
     NTZQSUBD_OT_resetallsettings,
-    NTZQSUBD_OT_subdmainoperator,
+    NTZQSUBD_OT_setsubdmode,
     NTZQSUBD_OT_relativelevelchange,
     NTZQSUBD_OT_specificlevelchange,
     NTZQSUBD_OT_ntzaddonprefs,
@@ -62,6 +67,14 @@ classes = (
 # -----------------------------------------------------------------------------    
 
 addon_keymaps = []
+
+#vscode pme workaround from iceythe (part 1 of 2)
+def _reg():
+    pme = bpy.utils._preferences.addons['pie_menu_editor'].preferences
+    for pm in pme.pie_menus:
+        if pm.key != 'NONE':
+            pm.register_hotkey()
+#END vscode pme workaround (part 1 of 2)
 
 def register():
     from bpy.utils import register_class
@@ -78,6 +91,13 @@ def register():
     #add property group to the scene
     bpy.types.Scene.neltulzSubD = bpy.props.PointerProperty(type=NTZQSUBD_ignitproperties)
 
+    #vscode pme workaround from iceythe (part 2 of 2)
+    #must be appended to def register() so that it is the last thing that executes
+    if bDebugModeActive:
+        if not bpy.app.timers.is_registered(_reg):
+            bpy.app.timers.register(_reg, first_interval=1)
+    #END vscode pme workaround (part 2 of 2)
+
 def unregister():
     from bpy.utils import unregister_class
     for cls in reversed(classes):
@@ -90,4 +110,4 @@ if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.ntz_qck_subd.subdivide_obj()
+    bpy.ops.ntzqcksubd.setsubdmode()

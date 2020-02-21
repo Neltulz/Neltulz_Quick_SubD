@@ -90,7 +90,7 @@ class NTZQSUBD_OT_ntzaddonprefs(AddonPreferences):
         items       = popupAndPiePanelSize_List,
         name        = "Popup & Pie Panel Size",
         description = "Popup & Pie Panel Size",
-        default     = "DEFAULT",
+        default     = "COMPACT",
         update=update_panel,
     )
 

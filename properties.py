@@ -6,7 +6,7 @@ from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 def neltulzSubD_setSpecificSubDLevel(self, context):
     if bpy.context.selected_objects:
-        bpy.ops.ntz_qck_subd.specificlevelchange()
+        bpy.ops.ntzqcksubd.specificlevelchange()
 
 def neltulzSubD_UpdateAdvancedSettings(self, context):
     
@@ -16,7 +16,7 @@ def neltulzSubD_UpdateAdvancedSettings(self, context):
         # This condition prevents this from happening
         if not context.scene.neltulzSubD.busyUpdatingAdvancedSettings:
             
-            bpy.ops.ntz_qck_subd.updatealladvsettings()
+            bpy.ops.ntzqcksubd.updatealladvsettings()
             
         else:
             pass
@@ -88,6 +88,34 @@ class NTZQSUBD_ignitproperties(bpy.types.PropertyGroup):
         default = False,
     )
 
+    toggleSubDModes : BoolProperty (
+        name                = 'Toggle SubD',
+        description         = 'Toggle the SubD Modes instead of setting them',
+        default             =  False
+    )
+
+    subdModePreference_List = [
+        ("ON",      "2 (On)",  "", "", 0),
+        ("ONPLUS", "3 (On+)", "", "", 1),
+    ]
+
+    subdModePreference : EnumProperty (
+        items       = subdModePreference_List,
+        name        = "SubD Mode Preference",
+        description = 'Which "On" method you prefer?',
+        default     = "ONPLUS"
+    )
+
+    initialSubDLevel : IntProperty(
+        name="Initial SubD Level",
+        description="Initial SubD Level when enabling subdivision modifier",
+        default = 1,
+        min = 1,
+        max = 11,
+        soft_max = 5,
+    )
+
+
     changeLevel_PopoverEnum_List = [
         ("CHANGE_LEVEL", "Change SubD Level", "", "", 0),
     ]
@@ -140,9 +168,13 @@ class NTZQSUBD_ignitproperties(bpy.types.PropertyGroup):
         max = 11
     )
 
+    toggleGeneralOptionsBool : BoolProperty(
+        name="Toggle General options",
+        default = True
+    )
+
     toggleOverlayOptionsBool : BoolProperty(
-        name="Toggle Overlay options (Wireframe, Edge colors, etc)",
-        description="Default: True: Toggle Overlay options (Wireframe, Edge colors, etc)",
+        name="Toggle Overlay options",
         default = True
     )
     
