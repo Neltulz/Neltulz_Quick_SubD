@@ -78,7 +78,7 @@ def mainQuickSubDPanel(self, context, bUseCompactSidebarPanel, bUseCompactPopupA
             layout.label(text="Quick SubD")
         else:
             layout.ui_units_x = 13
-            layout.label(text="Quick SubD v1.0.6")
+            layout.label(text="Quick SubD v1.0.7")
     else:
         if bUseCompactSidebarPanel:
             layout.ui_units_x = 8
@@ -368,13 +368,13 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
         
 
     # -----------------------------------------------------------------------------
-    #   General Options
+    #   SubD Options
     # -----------------------------------------------------------------------------
 
     generalOptionsWrapper = optionsCol.box().column(align=True)
 
     #create show/hide toggle for options section
-    createShowHide(self, context, scene, "neltulzSubD", "toggleGeneralOptionsBool", None, "General Settings", generalOptionsWrapper)
+    createShowHide(self, context, scene, "neltulzSubD", "toggleGeneralOptionsBool", None, "SubD", generalOptionsWrapper)
     
 
     if scene.neltulzSubD.toggleGeneralOptionsBool is True:
@@ -393,7 +393,7 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
     overlayOptionsWrapper = optionsCol.box().column(align=True)
 
     #create show/hide toggle for options section
-    createShowHide(self, context, scene, "neltulzSubD", "toggleOverlayOptionsBool", None, "Display Settings", overlayOptionsWrapper)
+    createShowHide(self, context, scene, "neltulzSubD", "toggleOverlayOptionsBool", None, "Display", overlayOptionsWrapper)
     
 
     if scene.neltulzSubD.toggleOverlayOptionsBool is True:
@@ -412,7 +412,7 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
     advancedSettingsWrapper = optionsCol.box().column(align=True)
 
     #create show/hide toggle for options section
-    createShowHide(self, context, scene, "neltulzSubD", "showAdvancedSettings", "advancedSettings", "Use Advanced Settings", advancedSettingsWrapper)
+    createShowHide(self, context, scene, "neltulzSubD", "showAdvancedSettings", "advancedSettings", "Use Advanced", advancedSettingsWrapper)
 
     
     if scene.neltulzSubD.showAdvancedSettings:
@@ -424,19 +424,23 @@ def options_SectionInner(self, context, scene, activeObj, selObjs, numSelObjs, n
 
         #END Use Advanced Settings Box
 
-    layout.separator()
+    optionsCol.separator()
 
-    delResetApplyButtons = layout.row(align=True)
+    delResetApplyButtons = optionsCol.row(align=True)
     delResetApplyButtons.scale_y = 1.5
     
     op = delResetApplyButtons.operator('ntzqcksubd.deletemodifier', text="Delete", icon="X")
     op = delResetApplyButtons.operator('ntzqcksubd.applymodifier', text="Apply", icon="CHECKMARK")
 
-    layout.separator()     
+    optionsCol.separator()     
 
-    op = layout.operator('ntzqcksubd.resetallsettings', text="Reset All Settings", icon="LOOP_BACK")
+    op = optionsCol.operator('ntzqcksubd.resetallsettings', text="Reset All Settings", icon="LOOP_BACK")
 
 def options_general_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, bIndent, bWrapInBox, layout):
+
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     if bIndent:
 
         overlayOptionsRow = layout.row(align=True)
@@ -455,15 +459,15 @@ def options_general_Section(self, context, scene, activeObj, selObjs, numSelObjs
 
     subdModePreference = overlayOptionsCol.column(align=True)
     subdModePreference.label(text="SubD Mode Preference:")
-    subdModePreference.prop(scene.neltulzSubD, 'subdModePreference', text="")
+    subdModePreference.prop(prefs, 'subdModePreference', text="")
 
     overlayOptionsCol.separator()
     
-    overlayOptionsCol.prop(scene.neltulzSubD, 'toggleSubDModes')
+    overlayOptionsCol.prop(prefs, 'toggleSubDModes')
 
     overlayOptionsCol.separator()
 
-    overlayOptionsCol.prop(scene.neltulzSubD, 'initialSubDLevel', slider=False)
+    overlayOptionsCol.prop(prefs, 'initialSubDLevel', slider=False, text="Initial SubD Level")
     
 
 def options_wireframeAndEdgeDisplay_Section(self, context, scene, activeObj, selObjs, numSelObjs, neltulzSubD_modifier, bIndent, bWrapInBox, layout):

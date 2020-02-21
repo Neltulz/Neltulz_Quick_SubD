@@ -3,7 +3,7 @@ bl_info = {
     "author" : "Neil V. Moore",
     "description" : 'Quickly subdivide mesh with preset keymaps, picks best normal shading, supports multiple modes (Off, On, and On+), supports "Relative" and "Specific" Level Changing',
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 6),
+    "version" : (1, 0, 7),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
@@ -26,7 +26,7 @@ from . misc_ot                      import NTZQSUBD_OT_resetallsettings
 from . main_ot                      import NTZQSUBD_OT_setsubdmode
 from . relative_level_change        import NTZQSUBD_OT_relativelevelchange
 from . specific_level_change        import NTZQSUBD_OT_specificlevelchange
-from . addon_preferences            import NTZQSUBD_OT_ntzaddonprefs
+from . addonPrefs                   import NTZQSUBD_OT_ntzaddonprefs
 from . panels                       import NTZQSUBD_PT_changesubdlevel
 from . panels                       import NTZQSUBD_PT_options
 from . panels                       import NTZQSUBD_PT_sidebarpanel
@@ -36,7 +36,7 @@ from . import keymaps
 
 PendingDeprecationWarning
 
-bDebugModeActive = False
+bDebugModeActive = True
 if bDebugModeActive:
     print("##################################################################################################################################################################")
     print("REMINDER: DEBUG MODE ACTIVE")
@@ -83,7 +83,7 @@ def register():
 
     # update panel name
     prefs = bpy.context.preferences.addons[__name__].preferences
-    addon_preferences.update_panel(prefs, bpy.context)
+    addonPrefs.update_panel(prefs, bpy.context)
 
     #add keymaps from keymaps.py
     keymaps.neltulz_subd_register_keymaps(addon_keymaps)

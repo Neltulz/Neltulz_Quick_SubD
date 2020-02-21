@@ -36,6 +36,9 @@ def getCurrentSelectMode(self, context):
 #function setSubDMode
 def setSubDMode(self, context, mode, obj, scene, neltulzSubD_modifier, neltulzSubDLevelCustomProp):
 
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     disableConflictingModifiers(self, context, obj, scene)
 
     if neltulzSubD_modifier is not None:
@@ -43,10 +46,11 @@ def setSubDMode(self, context, mode, obj, scene, neltulzSubD_modifier, neltulzSu
         moveNeltulzSudDModifierToBottom(self, context, obj, scene, neltulzSubD_modifier)
 
         #if Toggle SubD is enabled:
-        if scene.neltulzSubD.toggleSubDModes:
+        if prefs.toggleSubDModes:
             
-            if   scene.neltulzSubD.subdModePreference == "ON":        toggleResultMode = 2
-            elif scene.neltulzSubD.subdModePreference == "ONPLUS":    toggleResultMode = 3
+
+            if   prefs.subdModePreference == "ON":        toggleResultMode = 2
+            elif prefs.subdModePreference == "ONPLUS":    toggleResultMode = 3
                 
             if obj['Neltulz_SubD_Level'] == 1 and mode == 1:
 
@@ -133,14 +137,17 @@ def getNeltulzSubD_modifier(self, context, obj):
 #function createNeltulzSubD_modifier
 def createNeltulzSubD_modifier(self, context, obj, scene, bUseAdvancedSettings_PanelCheckbox, bUseCustomRenderLevel_PanelCheckbox, viewport_level, render_level, neltulzSubDLevelCustomProp):
 
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     if bUseAdvancedSettings_PanelCheckbox is None:
         bUseAdvancedSettings_PanelCheckbox = False
 
     if viewport_level is None:
-        viewport_level = scene.neltulzSubD.initialSubDLevel
+        viewport_level = prefs.initialSubDLevel
 
     if render_level is None:
-        render_level = scene.neltulzSubD.initialSubDLevel
+        render_level = prefs.initialSubDLevel
     
     disableConflictingModifiers(self, context, obj, scene)
 
@@ -199,6 +206,9 @@ def createNeltulzSubD_modifier(self, context, obj, scene, bUseAdvancedSettings_P
 #function fixModifierAndCustomSubDivProp
 def fixModifierAndCustomSubDivProp(self, context, obj, scene, neltulzSubD_modifier, neltulzSubDLevelCustomProp):
 
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     localNeltulzSubDLevelCustomProp = neltulzSubDLevelCustomProp
 
     if localNeltulzSubDLevelCustomProp is None:
@@ -238,7 +248,7 @@ def fixModifierAndCustomSubDivProp(self, context, obj, scene, neltulzSubD_modifi
         else:
             #Missing Custom prop name AND missing neltulz SubD modifier
             self.report({'WARNING'}, 'Missing both the Custom Prop & the neltulz SubD modifier.  Creating them!' )
-            createNeltulzSubD_modifier(self, context, obj, scene, scene.neltulzSubD.advancedSettings, scene.neltulzSubD.useCustomRenderLevel, scene.neltulzSubD.initialSubDLevel, scene.neltulzSubD.initialSubDLevel, neltulzSubDLevelCustomProp)
+            createNeltulzSubD_modifier(self, context, obj, scene, scene.neltulzSubD.advancedSettings, scene.neltulzSubD.useCustomRenderLevel, prefs.initialSubDLevel, prefs.initialSubDLevel, neltulzSubDLevelCustomProp)
     
     #custom prop EXISTS
     else:
@@ -270,7 +280,7 @@ def fixModifierAndCustomSubDivProp(self, context, obj, scene, neltulzSubD_modifi
             #Custom prop EXISTS but we're a missing neltulz SubD modifier
             self.report({'WARNING'}, 'Custom Prop exists, but were missing the neltulz SubD modifier.  Creating them!' )
             
-            createNeltulzSubD_modifier(self, context, obj, scene, scene.neltulzSubD.advancedSettings, scene.neltulzSubD.useCustomRenderLevel, scene.neltulzSubD.initialSubDLevel, scene.neltulzSubD.initialSubDLevel, localNeltulzSubDLevelCustomProp)
+            createNeltulzSubD_modifier(self, context, obj, scene, scene.neltulzSubD.advancedSettings, scene.neltulzSubD.useCustomRenderLevel, prefs.initialSubDLevel, prefs.initialSubDLevel, localNeltulzSubDLevelCustomProp)
             
             if neltulzSubD_modifier is None:
                 localNeltulzSubD_modifier = getNeltulzSubD_modifier(self, context, obj)
@@ -330,6 +340,9 @@ def fixShadingAndAutoSmooth(self, context, obj, scene, neltulzSubD_modifier, nel
 #function applyRelativeLevelChange
 def applyRelativeLevelChange(self, context, obj, scene, neltulzSubD_modifier, decrease, neltulzSubDLevelCustomProp):
 
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     disableConflictingModifiers(self, context, obj, scene)
 
     localNeltulzSubD_modifier = neltulzSubD_modifier
@@ -374,8 +387,8 @@ def applyRelativeLevelChange(self, context, obj, scene, neltulzSubD_modifier, de
 
         else:
             if obj['Neltulz_SubD_Level'] == 1:
-                if   scene.neltulzSubD.subdModePreference == "ON":     preferredMode = 2
-                elif scene.neltulzSubD.subdModePreference == "ONPLUS": preferredMode = 3
+                if   prefs.subdModePreference == "ON":     preferredMode = 2
+                elif prefs.subdModePreference == "ONPLUS": preferredMode = 3
 
                 setSubDMode(self, context, preferredMode, obj, scene, localNeltulzSubD_modifier, localNeltulzSubDLevelCustomProp)
                 self.report({'INFO'}, 'Increased SubD level to: ' + str(localNeltulzSubD_modifier.levels) )
@@ -402,8 +415,11 @@ def applyRelativeLevelChange(self, context, obj, scene, neltulzSubD_modifier, de
 #function applySpecificLevelChange
 def applySpecificLevelChange(self, context, obj, scene, forceLevel, neltulzSubD_modifier, neltulzSubDLevelCustomProp):
 
-    if   scene.neltulzSubD.subdModePreference == "ON":     preferredMode = 2
-    elif scene.neltulzSubD.subdModePreference == "ONPLUS": preferredMode = 3
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
+    if   prefs.subdModePreference == "ON":     preferredMode = 2
+    elif prefs.subdModePreference == "ONPLUS": preferredMode = 3
 
     disableConflictingModifiers(self, context, obj, scene)
 
@@ -704,6 +720,9 @@ def deleteModifier(self, context, obj, scene, neltulzSubD_modifier, neltulzSubDL
 #function resetAllSettings
 def resetAllSettings(self, context, obj, scene, neltulzSubD_modifier, neltulzSubDLevelCustomProp):
 
+    #add-on preferences
+    prefs = bpy.context.preferences.addons[__package__].preferences
+
     if obj is not None:
         localNeltulzSubD_modifier = neltulzSubD_modifier
         localNeltulzSubDLevelCustomProp = neltulzSubDLevelCustomProp
@@ -721,9 +740,9 @@ def resetAllSettings(self, context, obj, scene, neltulzSubD_modifier, neltulzSub
     
     scene.neltulzSubD.busyUpdatingAdvancedSettings = True #Prevent scene properties from trying to update
     
-    scene.neltulzSubD.toggleSubDModes = False
-    scene.neltulzSubD.subdModePreference = 'ONPLUS'
-    scene.neltulzSubD.initialSubDLevel = 1
+    prefs.toggleSubDModes = False
+    prefs.subdModePreference = 'ONPLUS'
+    prefs.initialSubDLevel = 1
     scene.neltulzSubD.specificSubDLevel = 1
     scene.neltulzSubD.changeMethod = '1'
     scene.neltulzSubD.advancedSettings = False

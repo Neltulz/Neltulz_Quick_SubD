@@ -62,7 +62,7 @@ class NTZQSUBD_PT_options(Panel):
 
 class NTZQSUBD_PT_sidebarpanel(Panel):
 
-    bl_label = "Quick SubD v1.0.6"
+    bl_label = "Quick SubD v1.0.7"
     bl_category = "Neltulz"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"

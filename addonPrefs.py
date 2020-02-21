@@ -60,6 +60,18 @@ class NTZQSUBD_OT_ntzaddonprefs(AddonPreferences):
     # when defining this in a submodule of a python package.
     bl_idname = __package__
 
+    
+    navTabs_List = [
+        ("UILAY",      "UI Layout",  "", "", 0),
+        ("SUBD",       "SubD",       "", "", 1),
+    ]
+
+    navTabs : EnumProperty (
+        items       = navTabs_List,
+        name        = "Navigation Tabs",
+        default     = "UILAY"
+    )
+
     category: StringProperty(
         name="Tab Category",
         description="Choose a name for the category of the panel",
@@ -91,15 +103,46 @@ class NTZQSUBD_OT_ntzaddonprefs(AddonPreferences):
         name        = "Popup & Pie Panel Size",
         description = "Popup & Pie Panel Size",
         default     = "COMPACT",
+
         update=update_panel,
     )
+
+    toggleSubDModes : BoolProperty (
+        name                = 'Toggle SubD',
+        description         = 'Toggle the SubD Modes instead of setting them',
+        default             =  False
+    )
+
+    subdModePreference_List = [
+        ("ON",      "2 (On)",  "", "", 0),
+        ("ONPLUS", "3 (On+)", "", "", 1),
+    ]
+
+    subdModePreference : EnumProperty (
+        items       = subdModePreference_List,
+        name        = "SubD Mode Preference",
+        description = 'Which "On" method you prefer?',
+        default     = "ONPLUS"
+    )
+
+    initialSubDLevel : IntProperty(
+        name="",
+        description="Initial SubD Level when enabling subdivision modifier",
+        default = 1,
+        min = 1,
+        max = 11,
+        soft_max = 5,
+    )
+
+
+
 
     def draw(self, context):
 
         from . misc_layout import createProp
         layout = self.layout
 
-        labelWidth = 7
+        labelWidth = 8
         labelJustify = "RIGHT"
         propJustify = "LEFT"
         propWidth = 15
@@ -110,6 +153,18 @@ class NTZQSUBD_OT_ntzaddonprefs(AddonPreferences):
         else:
             bTabCatEnabled = True
 
-        createProp(self, context, None, True,           "Sidebar Panel",       "sidebarPanelSize",     propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
-        createProp(self, context, None, bTabCatEnabled, "Tab Category",        "category",             propHeight, labelWidth, propWidth, labelJustify, propJustify, "",    True, layout)
-        createProp(self, context, None, True,           "Popup & Pie Panel",   "popupAndPiePanelSize", propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
+        navRow = layout.row(align=True)
+        navRow.prop(self, 'navTabs', expand=True)
+
+
+        if self.navTabs == "UILAY":
+        
+            createProp(self, context, None, True,           "Sidebar Panel",         "sidebarPanelSize",     propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
+            createProp(self, context, None, bTabCatEnabled, "Tab Category",          "category",             propHeight, labelWidth, propWidth, labelJustify, propJustify, "",    True, layout)
+            createProp(self, context, None, True,           "Popup & Pie Panel",     "popupAndPiePanelSize", propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
+
+        elif self.navTabs == "SUBD":
+
+            createProp(self, context, None, True,           "SubD Mode Preference",  "subdModePreference",   1, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
+            createProp(self, context, None, True,           "",                      "toggleSubDModes",      1, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)
+            createProp(self, context, None, True,           "Initial SubD Level",    "initialSubDLevel",     1, labelWidth, propWidth, labelJustify, propJustify, None,  True, layout)

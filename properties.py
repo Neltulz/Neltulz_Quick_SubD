@@ -74,7 +74,8 @@ def neltulzSubD_EnableAllEdgeColorsFunc(self, context):
         bpy.context.space_data.overlay.show_edge_seams = True
         context.scene.neltulzSubD.enableAllEdgeColorsBool = False
 
-class NTZQSUBD_ignitproperties(bpy.types.PropertyGroup):
+
+class NTZQSUBD_ignitproperties(PropertyGroup):
 
     bShowHideLevelChangeOptions : BoolProperty (
         name="Change SubD Level",
@@ -87,34 +88,6 @@ class NTZQSUBD_ignitproperties(bpy.types.PropertyGroup):
         description="Reveals options.",
         default = False,
     )
-
-    toggleSubDModes : BoolProperty (
-        name                = 'Toggle SubD',
-        description         = 'Toggle the SubD Modes instead of setting them',
-        default             =  False
-    )
-
-    subdModePreference_List = [
-        ("ON",      "2 (On)",  "", "", 0),
-        ("ONPLUS", "3 (On+)", "", "", 1),
-    ]
-
-    subdModePreference : EnumProperty (
-        items       = subdModePreference_List,
-        name        = "SubD Mode Preference",
-        description = 'Which "On" method you prefer?',
-        default     = "ONPLUS"
-    )
-
-    initialSubDLevel : IntProperty(
-        name="Initial SubD Level",
-        description="Initial SubD Level when enabling subdivision modifier",
-        default = 1,
-        min = 1,
-        max = 11,
-        soft_max = 5,
-    )
-
 
     changeLevel_PopoverEnum_List = [
         ("CHANGE_LEVEL", "Change SubD Level", "", "", 0),
